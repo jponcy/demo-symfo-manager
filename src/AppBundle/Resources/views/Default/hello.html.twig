@@ -1,0 +1,7 @@
+coucou {{ valeur | reverse }}
+
+<ul>
+{% for c in valeur|reverse|split('') %}
+  <li>{{ c|upper }}</li>
+{% endfor %}
+</ul>
