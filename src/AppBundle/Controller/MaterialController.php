@@ -54,15 +54,20 @@ class MaterialController extends Controller
     * @Method({"GET", "POST"})
     * @Template("AppBundle:Material:create.html.twig")
     */
-    public function updateAction(Request $request, string $id)
+    public function updateAction(Request $request, Material $entity)
     {
-      $entity = $this->getRepository()->find($id);
-
-      if ($entity == null) {
-        throw $this->createNotFoundException();
-      }
-
       return $this->newOrEdit($request, $entity);
+    }
+
+    /**
+     * @Route("/{id}/delete")
+     * @Method({"GET", "POST"})
+     */
+    public function deleteAction(Material $entity)
+    {
+      $this->getManager()->remove($entity);
+      $this->getManager()->flush();
+      return $this->redirectToRoute('app_material_index');
     }
 
     /**
