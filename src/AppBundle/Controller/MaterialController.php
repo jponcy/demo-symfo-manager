@@ -50,32 +50,29 @@ class MaterialController extends Controller
     }
 
     /**
-     * @Route("/create", defaults={"id"=null})
-     * @Route("/{id}/update")
+    * @Route("/{id}/update")
+    * @Method({"GET", "POST"})
+    * @Template("AppBundle:Material:create.html.twig")
+    */
+    public function updateAction(Request $request, string $id)
+    {
+      $entity = $this->getRepository()->find($id);
+
+      if ($entity == null) {
+        throw $this->createNotFoundException();
+      }
+
+      return $this->newOrEdit($request, $entity);
+    }
+
+    /**
+     * @Route("/create")
      * @Method({"GET", "POST"})
      * @Template()
      */
-    public function createAction(Request $request, string $id = null)
+    public function createAction(Request $request)
     {
-        $entity = ($id == null ? new Material() : $this->getRepository()->find($id));
-
-        if ($entity == null) {
-          throw $this->createNotFoundException();
-        }
-
-        $form = $this->form($entity);
-        $form->handleRequest($request);
-
-        if ($request->getMethod() == 'POST' && $form->isValid()) {
-          $manager = $this->getManager();
-
-          $manager->persist($entity);
-          $manager->flush();
-
-          return $this->redirectToRoute('app_material_index');
-        }
-
-        return ['form' => $form->createView()];
+        return $this->newOrEdit($request, new Material());
     }
 
     /**
@@ -115,5 +112,21 @@ class MaterialController extends Controller
     private function getRepository(): MaterialRepository
     {
         return $this->getManager()->getRepository(Material::class);
+    }
+
+    private function newOrEdit(Request $request, Material $entity) {
+      $form = $this->form($entity);
+      $form->handleRequest($request);
+
+      if ($request->getMethod() == 'POST' && $form->isValid()) {
+        $manager = $this->getManager();
+
+        $manager->persist($entity);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_material_index');
+      }
+
+      return ['form' => $form->createView()];
     }
 }
