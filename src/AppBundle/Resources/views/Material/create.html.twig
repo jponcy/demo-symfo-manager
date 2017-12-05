@@ -1,0 +1,24 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block pagetitle %}Create material{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    {#
+      {{ dump(form) }}
+    #}
+
+    {{ form_start(form) }}
+      {{ form_row(form.name) }}
+      {{ form_row(form.type) }}
+
+      <center><!-- :-E Deprecated and degeulaced! -->
+        <div class="bg-primary" style="margin: auto;">
+          {{ form_widget(form.submit) }}
+        </div>
+      </center>
+      <div class="hidden">{{ form_rest(form) }}</div>
+    {{ form_end(form) }}
+
+{% endblock %}

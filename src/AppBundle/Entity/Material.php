@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Material.
@@ -23,6 +24,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="app_material")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MaterialRepository")
  * @ORM\HasLifecycleCallbacks()
+ *
+ * @UniqueEntity("name")
  */
 class Material
 {
@@ -36,7 +39,9 @@ class Material
     private $name;
 
     /**
-     * @ORM\Column(type="string", name="type")
+     * @ORM\Column(type="string", name="type", nullable=true)
+     *
+     * @Assert\NotBlank()
      *
      * @var string
      */

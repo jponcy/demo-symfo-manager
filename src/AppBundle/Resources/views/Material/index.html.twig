@@ -1,19 +1,22 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% import _self as material %}
+
+{% macro table(data) %}
+  {% include('AppBundle:Material:index_table.html.twig')
+    with {entities: data}
+    only
+    %}
+{% endmacro %}
+
 {% block pagetitle %}Materials{% endblock %}
 
 {% block body %}
-{{ parent() }}
+  {{ parent() }}
 
-{% include('AppBundle:Material:index_table.html.twig')
-  with {entities: entities}
-  only
-  %}
+  <a href="create" class="btn btn-primary">Ajouter</a>
 
-<hr>
-
-{% include('AppBundle:Material:index_table.html.twig')
-  with {entities: fake}
-  only
-  %}
+  {{ material.table(entities) }}
+  <hr>
+  {{ material.table(fake) }}
 {% endblock %}

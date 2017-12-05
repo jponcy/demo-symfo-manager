@@ -15,6 +15,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Material;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\NotBlankValidator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Repository\MaterialRepository;
@@ -25,6 +27,45 @@ use AppBundle\Repository\MaterialRepository;
  */
 class MaterialController extends Controller
 {
+
+    /** Creates then create/edit form. */
+    public function form(Material $entity)
+    {
+      $formBuilder = $this->createFormBuilder($entity);
+      $formBuilder->add('name', 'text', [
+        'label' => 'Nom',
+        'attr' => [
+          'style' => 'color: red'
+        ]
+      ]);
+      $formBuilder->add('type');
+      $formBuilder->add('submit', 'submit');
+
+      return $formBuilder->getForm();
+    }
+
+    /**
+     * @Route("/create")
+     * @Method({"GET", "POST"})
+     * @Template()
+     */
+    public function createAction(Request $request)
+    {
+        $entity = new Material();
+        $form = $this->form($entity);
+        $form->handleRequest($request);
+
+        if ($request->getMethod() == 'POST' && $form->isValid()) {
+          $manager = $this->getManager();
+
+          $manager->persist($entity);
+          $manager->flush();
+
+          return $this->redirectToRoute('app_material_index');
+        }
+
+        return ['form' => $form->createView()];
+    }
 
     /**
      * @Route("/")
