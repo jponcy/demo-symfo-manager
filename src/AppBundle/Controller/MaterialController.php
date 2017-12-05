@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints\NotBlankValidator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Repository\MaterialRepository;
+use AppBundle\Form\MaterialType;
 
 /**
  * Controller for Material.
@@ -31,6 +32,7 @@ class MaterialController extends Controller
     /** Creates then create/edit form. */
     public function form(Material $entity)
     {
+      /*
       $formBuilder = $this->createFormBuilder($entity);
       $formBuilder->add('name', 'text', [
         'label' => 'Nom',
@@ -40,8 +42,11 @@ class MaterialController extends Controller
       ]);
       $formBuilder->add('type');
       $formBuilder->add('submit', 'submit');
+      */
+      $form = $this->createForm(MaterialType::class, $entity);
+      $form->add('submit', 'submit');
 
-      return $formBuilder->getForm();
+      return $form;
     }
 
     /**
