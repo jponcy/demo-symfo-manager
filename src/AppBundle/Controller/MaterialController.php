@@ -50,43 +50,19 @@ class MaterialController extends Controller
     }
 
     /**
-    * @Route("/{id}/update")
-    * @Method({"GET", "POST"})
-    * @Template()
-    */
-    public function updateAction(Request $request, string $id)
-    {
-
-      $entity = $this->getRepository()->find($id);
-
-      if ($entity == null) {
-        throw $this->createNotFoundException();
-      }
-
-      $form = $this->form($entity);
-      $form->handleRequest($request);
-
-      if ($request->getMethod() == 'POST' && $form->isValid()) {
-        $manager = $this->getManager();
-
-        $manager->persist($entity);
-        $manager->flush();
-
-        return $this->redirectToRoute('app_material_index');
-      }
-
-      return ['form' => $form->createView()];
-
-    }
-
-    /**
-     * @Route("/create")
+     * @Route("/create", defaults={"id"=null})
+     * @Route("/{id}/update")
      * @Method({"GET", "POST"})
      * @Template()
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, string $id = null)
     {
-        $entity = new Material();
+        $entity = ($id == null ? new Material() : $this->getRepository()->find($id));
+
+        if ($entity == null) {
+          throw $this->createNotFoundException();
+        }
+
         $form = $this->form($entity);
         $form->handleRequest($request);
 

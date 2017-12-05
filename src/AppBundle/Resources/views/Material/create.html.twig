@@ -1,6 +1,15 @@
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block pagetitle %}Create material{% endblock %}
+{% block pagetitle %}
+{% spaceless %}
+  {# False if create with error(s) --- works fine with autogen ids. #}
+  {% if form.vars.value.name %}
+      Update
+  {% else %}
+      Create
+  {% endif %}
+{% endspaceless %}
+&nbsp;material{% endblock %}
 
 {% block body %}
     {{ parent() }}
