@@ -21,6 +21,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Repository\MaterialRepository;
 use AppBundle\Form\MaterialType;
+use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\Personel;
 
 
 /**
@@ -99,7 +101,7 @@ class MaterialController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getRepository()->findAll(), 'fake' => []];
+       return ['entities' => $this->getRepository()->findAll(), 'fake' => []];
     }
 
     /**
@@ -109,10 +111,11 @@ class MaterialController extends Controller
     public function fill()
     {
         $manager = $this->getManager();
-
+        
         foreach (['PC E550', 'bloc notes', 'crayon'] as $name) {
-            $entity = (new Material())->setName($name)->setType('test')->setNumber(20);
-
+            $pers = (new Personel())->setName($name);
+            $entity = (new Material())->setName($name)->setType('test')->setNumber(20)->setPersonel($pers);
+            
             $manager->persist($entity);
         }
 
@@ -120,7 +123,8 @@ class MaterialController extends Controller
 
         return $this->redirectToRoute('app_material_index');
     }
-
+        
+    
     private function getManager(): \Doctrine\ORM\EntityManager
     {
         return $this->getDoctrine()->getManager();

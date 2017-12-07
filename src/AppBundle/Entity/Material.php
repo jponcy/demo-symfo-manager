@@ -51,7 +51,7 @@ class Material extends EntityBase
     
     
     /**
-     * @ORM\ManyToOne(targetEntity="Personel", inversedBy="material")
+     * @ORM\ManyToOne(targetEntity="Personel", inversedBy="materials", cascade={"persist", "remove"})
      * @JoinColumn(name="personel_id", referencedColumnName="id")
      * @var Personel
      */
@@ -65,7 +65,7 @@ class Material extends EntityBase
     private $materials;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Material", inversedBy="materials")
+     * @ORM\ManyToOne(targetEntity="Material", inversedBy="materials", cascade={"persist", "remove"})
      * @var Material
      */
     private $material;

@@ -14,12 +14,33 @@
 {% block body %}
   {{ parent() }}
   
-  <div>
-  	
-  </div>
   
 	<!-- TODO: add informations view -->
 	<!-- TODO: add func to add material -->
-	<!-- TODO: add tab of materials -->
+
+<table class="table table-striped table-hover table-condensed">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Number</th>
+		<th>Derniére update</th>
+	</tr>
+	<tr>
+	<tbody>
+		{% for entity in entities.material %}
+		<tr>
+			<td>{{ entity.name }}</td>
+			<td>{{ entity.type }}</td>
+			<td>{{ entity.number }}</td>
+			<td>{{ entity.updatedAt|date() }}</td>
+		</tr>
+		{% else %}
+		<tr class="warning">
+			<td colspan="4">No records found</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	</tr>
+</table>
 
 {% endblock %}

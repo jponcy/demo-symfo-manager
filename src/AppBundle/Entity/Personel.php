@@ -33,7 +33,6 @@ class Personel extends EntityBase
 	/**
 	 * @ORM\Column(type="string", name="lastname", nullable=true)
 	 *
-	 * @Assert\NotBlank()
 	 *
 	 * @var string
 	 */

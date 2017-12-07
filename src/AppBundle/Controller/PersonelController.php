@@ -120,5 +120,25 @@ class PersonelController extends Controller
         return ['form' => $form->createView()];
     }
     
+    
+    /**
+     * @Route("/fill")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function fill()
+    {
+        $manager = $this->getManager();
+        
+        foreach (['riri', 'fifi', 'toto'] as $name) {
+            echo $name;
+            $entity = (new Personel())->setName($name);            
+            $manager->persist($entity);
+        }
+        
+        $manager->flush();
+        
+        return $this->redirectToRoute('app_personel_index');
+    }
+    
 }
 
