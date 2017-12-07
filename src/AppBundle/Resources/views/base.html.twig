@@ -3,5 +3,9 @@
 {% block title %}{{ block('pagetitle') }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-  <h1>{% block pagetitle %}{% endblock %}</h1>
+	<ul class="nav nav-tabs">
+		<li><a href="{{ path('app_material_index') }}">Materiel</a></li>
+		<li><a href="{{ path('app_personel_index') }}">Personel</a></li>
+	</ul>
+	<h1>{% block pagetitle %}{% endblock %}</h1>
 {% endblock %}

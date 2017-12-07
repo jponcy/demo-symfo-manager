@@ -1,0 +1,20 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% import _self as personel %}
+
+{% macro table(data) %}
+  {% include('AppBundle:Personel:index_table.html.twig')
+    with {entities: data}
+    only
+    %}
+{% endmacro %}
+
+{% block pagetitle %}Personels{% endblock %}
+
+{% block body %}
+  {{ parent() }}
+
+  <a href="{{ path('app_personel_create') }}" class="btn btn-primary">Ajouter</a>
+
+  {{ personel.table(entities) }}
+{% endblock %}

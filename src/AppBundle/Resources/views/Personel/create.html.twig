@@ -9,7 +9,7 @@
       Create
   {% endif %}
 {% endspaceless %}
-&nbsp;material{% endblock %}
+&nbsp;personel{% endblock %}
 
 {% block body %}
     {{ parent() }}
@@ -20,13 +20,11 @@
 
     {{ form_start(form) }}
       {{ form_row(form.name) }}
-      {{ form_row(form.type) }}
+      {{ form_row(form.lastname) }}
 
-      <center><!-- :-E Deprecated and degeulaced! -->
         <div style="margin: auto;">
           {{ form_widget(form.submit) }}
         </div>
-      </center>
       <div class="hidden">{{ form_rest(form) }}</div>
     {{ form_end(form) }}
 

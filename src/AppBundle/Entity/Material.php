@@ -17,6 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Annotations\Annotation\Attribute;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Material.
@@ -27,16 +29,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @UniqueEntity("name")
  */
-class Material
+class Material extends EntityBase
 {
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string", name="name")
-     *
-     * @var string
-     */
-    private $name;
 
     /**
      * @ORM\Column(type="string", name="type", nullable=true)
@@ -46,54 +40,100 @@ class Material
      * @var string
      */
     private $type;
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Personel", inversedBy="material")
+     * @JoinColumn(name="personel_id", referencedColumnName="id")
+     * @var Personel
+     */
+    private $personel;    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Material", mappedBy="material", cascade={"persist", "remove"})
+     * 
+     * @var ArrayCollection
+     */
+    private $materials;
 
     /**
-     * @ORM\Column(type="datetime", name="created_at")
-     *
-     * @Assert\DateTime()
-     *
-     * @var \DateTime
+     * @ORM\ManyToOne(targetEntity="Material", inversedBy="materials")
+     * @var Material
      */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
-     *
-     * @Assert\DateTime()
-     *
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function prePersist()
+    private $material;
+    
+    
+    public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->materials = new ArrayCollection();
     }
-
+    
+    
     /**
-     * @ORM\PreUpdate()
-     */
-    public function preUpdate()
-    {
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * Set the name.
+     * Set the personel
      *
-     * @param string $name
-     *
-     * @return Material
+     * @param Personel $personel
      */
-    public function setName(string $name): Material
+    public function setPersonel(Personel $personel)
     {
-        $this->name = $name;
-
+        $this->personel = $personel;
         return $this;
     }
+    
+    /**
+     * get the personel
+     *
+     * @return $personel
+     */
+    public function getPersonel()
+    {
+        return $this->personel;
+    }
+    
+    
+    /**
+     * Set the material
+     *
+     * @param Material $material
+     */
+    public function setMaterial(Material $material)
+    {
+        $this->material = $material;
+        return $this;
+    }
+    
+    /**
+     * get the material
+     *
+     * @return $material
+     */
+    public function getMaterial()
+    {
+        return $this->material;
+    }
+    
+    
+    /**
+     * Set the materials
+     *
+     * @param Collection $materials
+     */
+    public function setMaterials(ArrayCollection $materials)
+    {
+        $this->materials = $materials;
+        return $this;
+    }
+    
+    /**
+     * get the materials
+     *
+     * @return $materials
+     */
+    public function getMaterials()
+    {
+        return $this->materials;
+    }
+    
 
     /**
      * Get the type.
@@ -119,61 +159,24 @@ class Material
         return $this;
     }
 
-    /**
-     * Get the createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set the createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Material
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get the name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Get the updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set the updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Material
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

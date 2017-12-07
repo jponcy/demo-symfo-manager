@@ -9,14 +9,11 @@
     %}
 {% endmacro %}
 
-{% block pagetitle %}Materials{% endblock %}
+{% block pagetitle %} {{ entities.name }} {% endblock %}
 
 {% block body %}
   {{ parent() }}
 
-  <a href="{{ path('app_material_create') }}" class="btn btn-primary">Ajouter</a>
 
-  {{ material.table(entities) }}
-<!--   <hr>
-  {{ material.table(fake) }} -->
+
 {% endblock %}

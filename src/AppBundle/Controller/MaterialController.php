@@ -22,6 +22,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Repository\MaterialRepository;
 use AppBundle\Form\MaterialType;
 
+
 /**
  * Controller for Material.
  * @Route("/material")
@@ -47,6 +48,16 @@ class MaterialController extends Controller
       $form->add('submit', 'submit');
 
       return $form;
+    }
+    
+    /**
+     * @Route("/{id}/view")
+     * @Method({"GET", "POST"})
+     * @Template("AppBundle:Material:view.html.twig")
+     */
+    public function viewAction(Request $request, Material $entity)
+    {
+        return ['entities' => $entity];
     }
 
     /**

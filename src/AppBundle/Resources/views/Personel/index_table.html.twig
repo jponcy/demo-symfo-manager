@@ -2,9 +2,9 @@
 <table class="table table-striped table-hover table-condensed">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Derniére update</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>UpdatedAt</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -12,20 +12,20 @@
     {% for entity in entities %}
     <tr>
       <td>{{ entity.name }}</td>
-      <td>{{ entity.type }}</td>
-      <td>{{ entity.updatedAt|date() }}</td>      
+      <td>{{ entity.lastname }}</td>
+      <td>{{ entity.updatedAt|date() }}</td>
       <td>
         <div class="btn-group">
-        <a href="{{ path('app_material_view', {id: entity.id}) }}" class="btn btn-success">
+        <a href="{{ path('app_personel_view', {id: entity.id}) }}" class="btn btn-success">
         <i class="glyphicon glyphicon-user"></i>
         Profil
         </a>
         
-          <a href="{{ path('app_material_update', {id: entity.id}) }}" class="btn btn-default">
+          <a href="{{ path('app_personel_update', {id: entity.id}) }}" class="btn btn-default">
             <i class="glyphicon glyphicon-edit"></i>
             Update
           </a>
-          <a href="{{ path('app_material_delete', {id: entity.id}) }}" class="btn btn-danger">
+          <a href="{{ path('app_personel_delete', {id: entity.id}) }}" class="btn btn-danger">
             <i class="glyphicon glyphicon-remove"></i>
             Delete
           </a>
