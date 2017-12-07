@@ -41,6 +41,14 @@ class Material extends EntityBase
      */
     private $type;
     
+    /**
+     * @ORM\Column(type="integer", name="number")
+     * 
+     * @var int
+     */
+    private $number;
+    
+    
     
     /**
      * @ORM\ManyToOne(targetEntity="Personel", inversedBy="material")
@@ -66,6 +74,28 @@ class Material extends EntityBase
     public function __construct()
     {
         $this->materials = new ArrayCollection();
+    }
+    
+
+    /**
+     * Set the number
+     *
+     * @param int $number
+     */
+    public function setNumber(int $number)
+    {
+        $this->number = $number;
+        return $this;
+    }
+    
+    /**
+     * get the number
+     *
+     * @return $number
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
     
     

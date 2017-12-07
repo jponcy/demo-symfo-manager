@@ -111,7 +111,7 @@ class MaterialController extends Controller
         $manager = $this->getManager();
 
         foreach (['PC E550', 'bloc notes', 'crayon'] as $name) {
-            $entity = (new Material())->setName($name)->setType('test');
+            $entity = (new Material())->setName($name)->setType('test')->setNumber(20);
 
             $manager->persist($entity);
         }
