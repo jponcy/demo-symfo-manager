@@ -15,7 +15,7 @@ class EntityBase
     /**
      * @ORM\Id
      * @ORM\Column(type="integer", name="id")
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      *
      *
      * @var int

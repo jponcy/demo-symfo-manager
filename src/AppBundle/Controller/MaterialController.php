@@ -23,6 +23,9 @@ use AppBundle\Repository\MaterialRepository;
 use AppBundle\Form\MaterialType;
 use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Personel;
+use FOS\RestBundle\Controller\Annotations as Rest;
+
+
 
 
 /**
@@ -101,7 +104,7 @@ class MaterialController extends Controller
      */
     public function indexAction()
     {
-       return ['entities' => $this->getRepository()->findAll(), 'fake' => []];
+       return ['entities' => $this->getRepository()->findAll()];
     }
 
     /**

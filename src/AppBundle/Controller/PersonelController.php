@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlankValidator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
 use AppBundle\Repository\PersonelRepository;
 use AppBundle\Form\PersonelType;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 
 /**
