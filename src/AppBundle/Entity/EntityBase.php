@@ -3,8 +3,10 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Doctrine\Common\Collections\Collection;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * @ORM\MappedSuperclass()
@@ -17,6 +19,7 @@ class EntityBase
      * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="AUTO")
      *
+     *@Exclude()
      *
      * @var int
      */
