@@ -105,9 +105,13 @@ class Material extends EntityBase
      *
      * @param Personel $personel
      */
-    public function setPersonel(Personel $personel)
+    public function setPersonel(Personel $personel = null)
     {
-        $this->personel = $personel;
+        if ($personel != $this->getMaterial()) {
+            $this->personel = $personel;
+            $personel->addMaterial($this);
+        }
+        
         return $this;
     }
     

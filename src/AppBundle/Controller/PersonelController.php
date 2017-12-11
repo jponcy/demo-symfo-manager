@@ -23,6 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Repository\PersonelRepository;
 use AppBundle\Form\PersonelType;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 
@@ -33,7 +34,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  * @author dereck
  *
  */
-class PersonelController extends Controller
+class PersonelController extends FOSRestController
 {
     public function form(Personel $entity)
     {

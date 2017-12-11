@@ -18,6 +18,8 @@
       {{ dump(form) }}
     #}
 
+	{{  form(form) }}
+{#
     {{ form_start(form) }}
       {{ form_row(form.name) }}
       {{ form_row(form.lastname) }}
@@ -27,5 +29,5 @@
         </div>
       <div class="hidden">{{ form_rest(form) }}</div>
     {{ form_end(form) }}
-
+#}
 {% endblock %}

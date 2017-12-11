@@ -52,16 +52,33 @@ class Personel extends EntityBase
 	}
 	
 	
-	/**
-	 * Set the materials
-	 *
-	 * @param ArrayCollection $materials
-	 */
-	public function setMaterials(ArrayCollection $materials)
-	{
-	    $this->materials = $materials;
-	    return $this;
-	}
+// 	/**
+// 	 * Set the materials
+// 	 *
+// 	 * @param ArrayCollection $materials
+// 	 */
+// 	public function setMaterials(ArrayCollection $materials)
+// 	{
+// 	    $this->materials = $materials;
+// 	    return $this;
+// 	}
+    public function addMaterial(Material $m): Personel {
+        if (!$this->materials->contains($m)) {
+            $this->materials->add($m);
+            $m->setPersonel($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeMaterial(Material $m): Personel {
+        if ($this->materials->contains($m)) {
+            $this->materials->removeElement($m);
+            $m->setPersonel(null);
+        }
+        
+        return $this;
+    }
 	
 	/**
 	 * get the materials

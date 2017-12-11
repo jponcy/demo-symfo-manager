@@ -5,7 +5,7 @@ use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 
-class MaterialListner implements EventSubscriberInterface
+class MaterialListener implements EventSubscriberInterface
 {
 
     public static function getSubscribedEvents()
@@ -28,6 +28,6 @@ class MaterialListner implements EventSubscriberInterface
         $date = new \Datetime();
         
         // Possibilité de modifier le tableau après sérialisation
-        $event->getVisitor()->addData('updatedAt', $date->format('l jS \of F Y h:i:s A'));
+        $event->getVisitor()->addData('AddLine', $date->format('l jS \of F Y h:i:s A'));
     }
 }

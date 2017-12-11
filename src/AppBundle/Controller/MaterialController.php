@@ -23,6 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Repository\MaterialRepository;
 use AppBundle\Form\MaterialType;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\RestBundle\Controller\FOSRestController;
 use AppBundle\Entity\Personel;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation as Doc;
@@ -31,12 +32,12 @@ use Nelmio\ApiDocBundle\Annotation as Doc;
  * Controller for Material.
  * @Route("/material")
  */
-class MaterialController extends Controller
+class MaterialController extends FOSRestController
 {
     
     /* Try to serialize with jms + nelmio*/
     /**
-     * @Route("/serializeShow/{id}", name="seria1")
+     * @Rest\Get("/serializeShow/{id}", name="seria1")
      * 
      * @Doc\ApiDoc(
      *                  ressource=true,

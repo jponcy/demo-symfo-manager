@@ -70,10 +70,6 @@ swiftmailer:
     
 nelmio_api_doc: ~
     
-##Config to use webpage
-#sensio_framework_extra:
-#    router: {   annotations: true } 
-
     
 #Config to use rest
 sensio_framework_extra:
@@ -88,9 +84,7 @@ fos_rest:
          formats: { json: true, xml: false, rss: false }
     serializer:
         serialize_null: true
-    format_listener:
-        rules:
-            - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+    format_listener: true
 
     
     
